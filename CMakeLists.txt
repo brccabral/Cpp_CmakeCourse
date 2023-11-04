@@ -14,11 +14,11 @@ set(EXECUTABLE_NAME Executable)
 option(COMPILE_EXECUTABLE "Whether to compile the executable" OFF)
 message("COMPILE_EXECUTABLE ${COMPILE_EXECUTABLE}")
 
+add_subdirectory(configured)
 # src must come before app because app depends on src library
 add_subdirectory(src)
 if (COMPILE_EXECUTABLE)
     add_subdirectory(app)
-    install(TARGETS Executable)
 else()
     message("Without exe compiling")
 endif()
