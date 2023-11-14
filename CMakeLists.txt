@@ -25,6 +25,14 @@ if(ENABLE_WARNINGS)
     include(Warnings)
 endif()
 
+option(ENABLE_SANITIZE_ADDR "Enable ..." ON)
+option(ENABLE_SANITIZE_UNDEF "Enable ..." ON)
+
+if(ENABLE_SANITIZE_ADDR OR ENABLE_SANITIZE_UNDEF)
+    include(Sanitizers)
+    add_sanitizer_flags()
+endif()
+
 # * add_git_submodule is a function added by AddGitSubmodule above
 # * it executes "git" custom commands that we wrote
 # add_git_submodule(external/json)
