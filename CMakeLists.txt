@@ -16,6 +16,7 @@ message("COMPILE_EXECUTABLE ${COMPILE_EXECUTABLE}")
 
 set(CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/cmake/")
 include(AddGitSubmodule) # * name of .cmake file, inside ${PROJECT_SOURCE_DIR}/cmake
+include(Docs)
 
 # * add_git_submodule is a function added by AddGitSubmodule above
 # * it executes "git" custom commands that we wrote
