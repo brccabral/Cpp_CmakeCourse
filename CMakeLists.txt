@@ -11,7 +11,7 @@ set(EXECUTABLE_NAME Executable)
 
 # option() are input variables from command line
 # gets saved in CMakeCache.txt
-option(COMPILE_EXECUTABLE "Whether to compile the executable" OFF)
+option(COMPILE_EXECUTABLE "Whether to compile the executable" ON)
 message("COMPILE_EXECUTABLE ${COMPILE_EXECUTABLE}")
 
 set(CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/cmake/")
