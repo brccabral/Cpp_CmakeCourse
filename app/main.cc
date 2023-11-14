@@ -8,6 +8,10 @@
 #include <fmt/format.h>
 #include <spdlog/spdlog.h>
 
+/// \file
+/**
+ * @brief main function
+ */
 int main()
 {
     std::cout << project_name << '\n';
