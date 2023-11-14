@@ -15,9 +15,22 @@ option(COMPILE_EXECUTABLE "Whether to compile the executable" OFF)
 message("COMPILE_EXECUTABLE ${COMPILE_EXECUTABLE}")
 
 set(CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/cmake/")
-include(AddGitSubmodule) # name of .cmake file
+include(AddGitSubmodule) # * name of .cmake file, inside ${PROJECT_SOURCE_DIR}/cmake
 
-add_git_submodule(external/json)
+# * add_git_submodule is a function added by AddGitSubmodule above
+# * it executes "git" custom commands that we wrote
+# add_git_submodule(external/json)
+
+# * FetchContent is an internal CMake module that clones a git repo into
+# * the "build" folder and configures it for this project
+include(FetchContent)
+FetchContent_Declare(
+    nlohmann_json
+    GIT_REPOSITORY https://github.com/nlohmann/json
+    GIT_TAG v3.11.2
+    GIT_SHALLOW TRUE
+)
+FetchContent_MakeAvailable(nlohmann_json)
 
 add_subdirectory(external)
 add_subdirectory(configured)
