@@ -82,3 +82,7 @@ if(COMPILE_EXECUTABLE)
 else()
     message("Without exe compiling")
 endif()
+
+# * Use Catch2 to create Unit Tests
+option(ENABLE_TESTING "Enable a Unit Testing Build" OFF)
+add_subdirectory(tests)
