@@ -17,6 +17,8 @@ int main()
     std::cout << project_name << '\n';
     std::cout << project_version << '\n';
 
+    int never_used_var = 0;
+
     std::cout << "JSON: "
               << NLOHMANN_JSON_VERSION_MAJOR << "."
               << NLOHMANN_JSON_VERSION_MINOR << "."

@@ -18,6 +18,13 @@ set(CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/cmake/")
 include(AddGitSubmodule) # * name of .cmake file, inside ${PROJECT_SOURCE_DIR}/cmake
 include(Docs)
 
+option(ENABLE_WARNINGS "Enable warnings" ON)
+option(ENABLE_WARNINGS_AS_ERRORS "Enable warnings as errors" ON)
+
+if(ENABLE_WARNINGS)
+    include(Warnings)
+endif()
+
 # * add_git_submodule is a function added by AddGitSubmodule above
 # * it executes "git" custom commands that we wrote
 # add_git_submodule(external/json)
