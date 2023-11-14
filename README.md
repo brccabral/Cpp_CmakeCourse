@@ -13,8 +13,8 @@ https://www.graphviz.org/download/
 https://www.doxygen.nl/download.html  
 Put `Graphviz\bin` and `doxygen\bin` on `%PATH%`.  
 ```
-cd out\build
-cmake ..\.. --graphviz=graph.dot
+cd out\build\x64-debug
+cmake ..\..\.. --graphviz=graph.dot
 dot.exe -Tpng graph.dot -o graph.png
 ```
 
