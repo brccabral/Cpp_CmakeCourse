@@ -24,6 +24,8 @@ include(AddGitSubmodule) # * name of .cmake file, inside ${PROJECT_SOURCE_DIR}/c
 # * FetchContent is an internal CMake module that clones a git repo into
 # * the "build" folder and configures it for this project
 include(FetchContent)
+
+# JSON library
 FetchContent_Declare(
     nlohmann_json
     GIT_REPOSITORY https://github.com/nlohmann/json
@@ -31,6 +33,42 @@ FetchContent_Declare(
     GIT_SHALLOW TRUE
 )
 FetchContent_MakeAvailable(nlohmann_json)
+
+# Format Strings
+FetchContent_Declare(
+    fmt
+    GIT_REPOSITORY https://github.com/fmtlib/fmt
+    GIT_TAG 10.1.1
+    GIT_SHALLOW TRUE
+)
+FetchContent_MakeAvailable(fmt)
+
+# Logging
+FetchContent_Declare(
+    spdlog
+    GIT_REPOSITORY https://github.com/gabime/spdlog
+    GIT_TAG v1.12.0
+    GIT_SHALLOW TRUE
+)
+FetchContent_MakeAvailable(spdlog)
+
+# Command Line arguments parser
+FetchContent_Declare(
+    cxxopts
+    GIT_REPOSITORY https://github.com/jarro2783/cxxopts
+    GIT_TAG v3.1.1
+    GIT_SHALLOW TRUE
+)
+FetchContent_MakeAvailable(cxxopts)
+
+# Unit test
+FetchContent_Declare(
+    Catch2
+    GIT_REPOSITORY https://github.com/catchorg/Catch2
+    GIT_TAG v3.4.0
+    GIT_SHALLOW TRUE
+)
+FetchContent_MakeAvailable(Catch2)
 
 add_subdirectory(external)
 add_subdirectory(configured)
