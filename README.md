@@ -8,15 +8,18 @@ git submodule add --depth 1 https://github.com/nlohmann/json external/json
 ```
 
 Graphviz - view CMake dependencies in a flow chart  
-https://www.graphviz.org/download/ 
-
+https://www.graphviz.org/download/  
+**Install Doxygen (Graphviz dependency).**  
+https://www.doxygen.nl/download.html  
+Put `Graphviz\bin` and `doxygen\bin` on `%PATH%`.  
 ```
 cd out\build
 cmake ..\.. --graphviz=graph.dot
 dot.exe -Tpng graph.dot -o graph.png
 ```
 
-Doxygen - Generates HTML documentation based on code comments
+Doxygen - Generates HTML documentation based on code comments  
+https://www.doxygen.nl/download.html  
 ```sh
 mkdir docs
 cd docs
