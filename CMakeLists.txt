@@ -42,7 +42,8 @@ if(ENABLE_LTO)
     include(LTO)
 endif()
 
-option(USE_CPM "Whether to use CPM" ON)
+option(USE_CPM "Whether to use CPM" OFF)
+option(USE_CONAN "Whether to use Conan" ON)
 
 if(USE_CPM)
     message(STATUS "Using CPM")
@@ -54,6 +55,18 @@ if(USE_CPM)
     cpmaddpackage("gh:gabime/spdlog#v1.12.0")
     cpmaddpackage("gh:jarro2783/cxxopts#v3.1.1")
     cpmaddpackage("gh:catchorg/Catch2#v3.4.0")
+elseif(${USE_CONAN})
+    message(STATUS "Using Conan")
+    include(${CMAKE_BINARY_DIR}/generators/conan_toolchain.cmake)
+    list(APPEND CMAKE_PREFIX_PATH ${CMAKE_BINARY_DIR}/generators)
+
+    find_package(nlohmann_json REQUIRED)
+    message("nlohmann_json_FOUND ${nlohmann_json_FOUND}")
+    message("nlohmann_json_LIBRARIES ${nlohmann_json_LIBRARIES}")
+    find_package(fmt REQUIRED)
+    find_package(spdlog REQUIRED)
+    find_package(cxxopts REQUIRED)
+    find_package(Catch2 REQUIRED)
 else()
     # * add_git_submodule is a function added by AddGitSubmodule above
     # * it executes "git" custom commands that we wrote

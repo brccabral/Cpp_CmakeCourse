@@ -47,3 +47,20 @@ CPM - Cmake Package Manager
 https://github.com/cpm-cmake/CPM.cmake  
 Download the single file `CPM.cmake`. Copy it to `${CMAKE_MODULE_PATH}`.  
 It can replace the usage of `FetchContent`.  
+
+Conan - Package Manager
+```sh
+python -m venv venv
+venv\Scripts\activate.bat
+pip install conan
+conan profile detect # creates a profile, default name is `default`
+conan profile path default # outputs `default` profile location
+```
+Go to https://conan.io/center/ and search for the dependent packages you need.  
+For each dependency, review how to setup `conanfile.py`/`conanfile.txt`.  
+```sh
+mkdir build
+cd build
+conan install .. --output-folder=. --build=missing
+```
+In VSCode, select `conan-default` as config preset.
