@@ -47,3 +47,24 @@ CPM - Cmake Package Manager
 https://github.com/cpm-cmake/CPM.cmake  
 Download the single file `CPM.cmake`. Copy it to `${CMAKE_MODULE_PATH}`.  
 It can replace the usage of `FetchContent`.  
+
+Conan - Package Manager
+```sh
+python -m venv venv
+venv\Scripts\activate.bat
+pip install conan
+conan profile detect # creates a profile, default name is `default`
+conan profile path default # outputs `default` profile location
+```
+Go to https://conan.io/center/ and search for the dependent packages you need.  
+For each dependency, review how to setup `conanfile.py`/`conanfile.txt`.  
+```sh
+conan install . -s build_type=Debug -s compiler.cppstd=17 --output-folder=build --build=missing
+cd build
+# configure (change CMAKE_INSTALL_PREFIX or other values)
+cmake .. -G "Visual Studio 17 2022" -DCMAKE_TOOLCHAIN_FILE=conan_toolchain.cmake -DCMAKE_INSTALL_PREFIX=install_to -DENABLE_SANITIZE_ADDR=OFF -DENABLE_SANITIZE_UNDEF=OFF -DENABLE_LTO=OFF
+# build
+cmake --build . --config Debug --target install
+```
+In VSCode, select `conan-default` as config preset.  
+Conan pre-builds the dependencies without applying Sanitizer or LTO. Need to disable them before building this project.  
