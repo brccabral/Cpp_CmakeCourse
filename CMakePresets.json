@@ -94,6 +94,20 @@
             "displayName": "Win Default",
             "configurePreset": "x64-debug",
             "description": "Vanilla build"
+        },
+        {
+            "name": "release-build-linux",
+            "displayName": "Linux Release",
+            "configurePreset": "linux-release",
+            "configuration": "Release",
+            "description": "Linux Release build"
+        },
+        {
+            "name": "release-build-windows",
+            "displayName": "Win Release",
+            "configurePreset": "x64-release",
+            "configuration": "Release",
+            "description": "Windows Release build"
         }
     ],
     "testPresets": [
