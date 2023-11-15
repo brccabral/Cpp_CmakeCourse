@@ -59,8 +59,9 @@ conan profile path default # outputs `default` profile location
 Go to https://conan.io/center/ and search for the dependent packages you need.  
 For each dependency, review how to setup `conanfile.py`/`conanfile.txt`.  
 ```sh
-mkdir build
+conan install . -s build_type=Debug -s compiler.cppstd=17 --output-folder=build --build=missing
 cd build
-conan install .. --output-folder=. --build=missing
+cmake .. -G "Visual Studio 17 2022" -DCMAKE_TOOLCHAIN_FILE=conan_toolchain.cmake
+cmake --build . --config Release
 ```
 In VSCode, select `conan-default` as config preset.

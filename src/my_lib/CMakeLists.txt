@@ -6,6 +6,19 @@ set(LIBRARY_INCLUDES
     "./"
     "${CMAKE_BINARY_DIR}/configured_files/include"
 )
+if(NOT ${nlohmann_json_INCLUDE_DIRS} STREQUAL "")
+set(LIBRARY_INCLUDES ${LIBRARY_INCLUDES} ${nlohmann_json_INCLUDE_DIRS})
+endif()
+if(NOT ${cxxopts_INCLUDE_DIRS} STREQUAL "")
+set(LIBRARY_INCLUDES ${LIBRARY_INCLUDES} ${cxxopts_INCLUDE_DIRS})
+endif()
+if(NOT ${fmt_INCLUDE_DIRS} STREQUAL "")
+set(LIBRARY_INCLUDES ${LIBRARY_INCLUDES} ${fmt_INCLUDE_DIRS})
+endif()
+if(NOT ${spdlog_INCLUDE_DIRS} STREQUAL "")
+set(LIBRARY_INCLUDES ${LIBRARY_INCLUDES} ${spdlog_INCLUDE_DIRS})
+message("spdlog_INCLUDE_DIRS ${spdlog_INCLUDE_DIRS}")
+endif()
 
 add_library(${LIBRARY_NAME} STATIC ${LIBRARY_SOURCES})
 target_include_directories(${LIBRARY_NAME} PUBLIC
