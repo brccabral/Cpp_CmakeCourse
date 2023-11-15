@@ -61,7 +61,10 @@ For each dependency, review how to setup `conanfile.py`/`conanfile.txt`.
 ```sh
 conan install . -s build_type=Debug -s compiler.cppstd=17 --output-folder=build --build=missing
 cd build
+# configure
 cmake .. -G "Visual Studio 17 2022" -DCMAKE_TOOLCHAIN_FILE=conan_toolchain.cmake
-cmake --build . --config Release
+# build
+cmake --build . --config Debug
 ```
-In VSCode, select `conan-default` as config preset.
+In VSCode, select `conan-default` as config preset.  
+Conan pre-builds the dependencies without applying Sanitizer or LTO. Need to disable them before building this project.  
