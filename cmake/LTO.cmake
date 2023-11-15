@@ -1,0 +1,17 @@
+function(target_enable_lto TARGET ENABLE)
+    if(NOT ${ENABLE})
+        return()
+    endif()
+
+    include(CheckIPOSupported)
+    check_ipo_supported(RESULT result OUTPUT output)
+
+    if(result)
+        message(STATUS "IPO/LTO is supported!")
+        set_property(TARGET ${TARGET} PROPERTY INTERPROCEDURAL_OPTIMIZATION ${ENABLE})
+        target_compile_options(${TARGET} PUBLIC "-Gy")
+        target_link_options(${TARGET} PUBLIC "-LTCG")
+    else()
+        message(WARNING "IPO/LOT is not supported!.")
+    endif()
+endfunction()

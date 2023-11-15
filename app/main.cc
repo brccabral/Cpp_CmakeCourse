@@ -19,8 +19,8 @@ int main()
 
     // int never_used_var = 0;
 
-    int check_out_of_bounds[2];
-    check_out_of_bounds[2] = 1337;
+    // int check_out_of_bounds[2];
+    // check_out_of_bounds[2] = 1337;
 
     std::cout << "JSON: "
               << NLOHMANN_JSON_VERSION_MAJOR << "."

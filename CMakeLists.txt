@@ -33,6 +33,15 @@ if(ENABLE_SANITIZE_ADDR OR ENABLE_SANITIZE_UNDEF)
     add_sanitizer_flags()
 endif()
 
+# Link Time Optimization - Optimizations during linkage
+# it may remove functions that our code doesn't use
+# Do not use together with SANITIZE options
+option(ENABLE_LTO "Enable ..." ON)
+
+if(ENABLE_LTO)
+    include(LTO)
+endif()
+
 # * add_git_submodule is a function added by AddGitSubmodule above
 # * it executes "git" custom commands that we wrote
 # add_git_submodule(external/json)
