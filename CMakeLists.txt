@@ -42,58 +42,73 @@ if(ENABLE_LTO)
     include(LTO)
 endif()
 
-# * add_git_submodule is a function added by AddGitSubmodule above
-# * it executes "git" custom commands that we wrote
-# add_git_submodule(external/json)
+option(USE_CPM "Whether to use CPM" ON)
 
-# * FetchContent is an internal CMake module that clones a git repo into
-# * the "build" folder and configures it for this project
-include(FetchContent)
+if(USE_CPM)
+    message(STATUS "Using CPM")
+    include(CPM)
 
-# JSON library
-FetchContent_Declare(
-    nlohmann_json
-    GIT_REPOSITORY https://github.com/nlohmann/json
-    GIT_TAG v3.11.2
-    GIT_SHALLOW TRUE
-)
-FetchContent_MakeAvailable(nlohmann_json)
+    # gh = github
+    cpmaddpackage("gh:nlohmann/json#v3.11.2")
+    cpmaddpackage("gh:fmtlib/fmt#10.1.1")
+    cpmaddpackage("gh:gabime/spdlog#v1.12.0")
+    cpmaddpackage("gh:jarro2783/cxxopts#v3.1.1")
+    cpmaddpackage("gh:catchorg/Catch2#v3.4.0")
+else()
+    # * add_git_submodule is a function added by AddGitSubmodule above
+    # * it executes "git" custom commands that we wrote
+    # add_git_submodule(external/json)
+    message(STATUS "Using FetchContent")
 
-# Format Strings
-FetchContent_Declare(
-    fmt
-    GIT_REPOSITORY https://github.com/fmtlib/fmt
-    GIT_TAG 10.1.1
-    GIT_SHALLOW TRUE
-)
-FetchContent_MakeAvailable(fmt)
+    # * FetchContent is an internal CMake module that clones a git repo into
+    # * the "build" folder and configures it for this project
+    include(FetchContent)
 
-# Logging
-FetchContent_Declare(
-    spdlog
-    GIT_REPOSITORY https://github.com/gabime/spdlog
-    GIT_TAG v1.12.0
-    GIT_SHALLOW TRUE
-)
-FetchContent_MakeAvailable(spdlog)
+    # JSON library
+    FetchContent_Declare(
+        nlohmann_json
+        GIT_REPOSITORY https://github.com/nlohmann/json
+        GIT_TAG v3.11.2
+        GIT_SHALLOW TRUE
+    )
+    FetchContent_MakeAvailable(nlohmann_json)
 
-# Command Line arguments parser
-FetchContent_Declare(
-    cxxopts
-    GIT_REPOSITORY https://github.com/jarro2783/cxxopts
-    GIT_TAG v3.1.1
-    GIT_SHALLOW TRUE
-)
-FetchContent_MakeAvailable(cxxopts)
+    # Format Strings
+    FetchContent_Declare(
+        fmt
+        GIT_REPOSITORY https://github.com/fmtlib/fmt
+        GIT_TAG 10.1.1
+        GIT_SHALLOW TRUE
+    )
+    FetchContent_MakeAvailable(fmt)
 
-# Unit test
-FetchContent_Declare(
-    Catch2
-    GIT_REPOSITORY https://github.com/catchorg/Catch2
-    GIT_TAG v3.4.0
-    GIT_SHALLOW TRUE
-)
-FetchContent_MakeAvailable(Catch2)
+    # Logging
+    FetchContent_Declare(
+        spdlog
+        GIT_REPOSITORY https://github.com/gabime/spdlog
+        GIT_TAG v1.12.0
+        GIT_SHALLOW TRUE
+    )
+    FetchContent_MakeAvailable(spdlog)
+
+    # Command Line arguments parser
+    FetchContent_Declare(
+        cxxopts
+        GIT_REPOSITORY https://github.com/jarro2783/cxxopts
+        GIT_TAG v3.1.1
+        GIT_SHALLOW TRUE
+    )
+    FetchContent_MakeAvailable(cxxopts)
+
+    # Unit test
+    FetchContent_Declare(
+        Catch2
+        GIT_REPOSITORY https://github.com/catchorg/Catch2
+        GIT_TAG v3.4.0
+        GIT_SHALLOW TRUE
+    )
+    FetchContent_MakeAvailable(Catch2)
+endif()
 
 add_subdirectory(external)
 add_subdirectory(configured)

@@ -42,3 +42,8 @@ Run doxygen.
 cd docs
 doxygen # now, it will read Doxygen and generate HTML files
 ```
+
+CPM - Cmake Package Manager  
+https://github.com/cpm-cmake/CPM.cmake  
+Download the single file `CPM.cmake`. Copy it to `${CMAKE_MODULE_PATH}`.  
+It can replace the usage of `FetchContent`.  
