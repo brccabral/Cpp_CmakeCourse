@@ -2,3 +2,4 @@ out/
 .vscode/
 venv/
 build/
+vcpkg_installed/

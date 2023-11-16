@@ -10,6 +10,9 @@
                 "type": "equals",
                 "lhs": "${hostSystemName}",
                 "rhs": "Windows"
+            },
+            "cacheVariables": {
+                "VCPKG_DIR":"${sourceDir}/../vcpkg"
             }
         },
         {

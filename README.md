@@ -2,12 +2,14 @@
 
 Cmake Udemy course https://udemy.com/course/cmake-tests-and-tooling-for-cc-projects  
 
-Add JSON as submodule
+1. Add JSON as submodule  
+
 ```sh
 git submodule add --depth 1 https://github.com/nlohmann/json external/json
 ```
 
-Graphviz - view CMake dependencies in a flow chart  
+2. Graphviz - view CMake dependencies in a flow chart  
+
 https://www.graphviz.org/download/  
 **Install Doxygen (Graphviz dependency).**  
 https://www.doxygen.nl/download.html  
@@ -18,7 +20,8 @@ cmake ..\..\.. --graphviz=graph.dot
 dot.exe -Tpng graph.dot -o graph.png
 ```
 
-Doxygen - Generates HTML documentation based on code comments  
+3. Doxygen - Generates HTML documentation based on code comments  
+
 https://www.doxygen.nl/download.html  
 ```sh
 mkdir docs
@@ -43,12 +46,14 @@ cd docs
 doxygen # now, it will read Doxygen and generate HTML files
 ```
 
-CPM - Cmake Package Manager  
+4. CPM - Cmake Package Manager  
+
 https://github.com/cpm-cmake/CPM.cmake  
 Download the single file `CPM.cmake`. Copy it to `${CMAKE_MODULE_PATH}`.  
 It can replace the usage of `FetchContent`.  
 
-Conan - Package Manager
+5. Conan - Package Manager  
+
 ```sh
 python -m venv venv
 venv\Scripts\activate.bat
@@ -68,3 +73,17 @@ cmake --build . --config Debug --target install
 ```
 In VSCode, select `conan-default` as config preset.  
 Conan pre-builds the dependencies without applying Sanitizer or LTO. Need to disable them before building this project.  
+
+6. VCPKG - Package Manager  
+
+Clone or download VCPKG https://github.com/microsoft/vcpkg  
+Run the `bootstrap.bat` and add the folder to your path to have access to `vcpkg.exe`.  
+Create file `vcpkg.json` in your project. The `dependencies` are only minimal versions, to pin-point a version, add it to `overrides`.  
+Also, `builtin-baseline` is the commit hash of vcpkg that will be executed.  
+When configuring CMake, pass in `-DVCPKG_DIR=C:\path\to\vcpkg`.  
+Run command below. VCPKG will download and compile the requested dependencies from `vcpkg.json`.  
+```sh
+vcpkg install
+```
+They will be in `${VCPKG_DIR}\packages`, but just include `${VCPKG_DIR}/scripts/buildsystems/vcpkg.cmake` into your CMake and it will find the packages location.  
+VCPKG pre-builds the dependencies without applying Sanitizer or LTO. Need to disable them before building this project.  
