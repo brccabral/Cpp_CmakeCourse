@@ -89,26 +89,30 @@ vcpkg install
 They will be in `${VCPKG_DIR}\packages`, but just include `${VCPKG_DIR}/scripts/buildsystems/vcpkg.cmake` into your CMake and it will find the packages location.  
 VCPKG pre-builds the dependencies without applying Sanitizer or LTO. Need to disable them before building this project.  
 
-7. Install Clang/LLVM
+7. Install Clang/LLVM  
+
 When installing "Visual Studio", go to "Individual components" tab, search for "llvm" and install "C++ Clang Compiler for Windows" and "MSBuild support for LLVM"
 Add to PATH
 - C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Auxiliary\Build
 - C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\Llvm\bin
 - C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin
 
-8. Clang-Tidy
+8. Clang-Tidy  
+
 After installing LLVM above, go to "C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\Llvm\bin" and copy file "run-clang-tidy" into this project "tools\run-clang-tidy.py".  
 On Windows we need to use "Visual Studio" for this. Open the solution file `projectname.sln` in VS, right click the solution, select "Analyze and Code Cleanup", and then "Run Code Analysis on \<target\>".  
 Remember to enable ENABLE_CLANG_TIDY, and disable ENABLE_SANITIZE_ADDR, ENABLE_SANITIZE_UNDEF and ENABLE_LTO.  
 On Linux, a new target is created as `<target>_clangtidy`, just run it.  
 
-9. Clang-Format
+9. Clang-Format  
+
 Format C/C++ files based on configuration set at `.clang-format` file. This project is using the instructor's settings.  
 Make sure that LLVM installation created `clang-format.exe` in LLVM\bin folder.  
 File `tools\run-clang-format.py` is from https://github.com/Sarcasm/run-clang-format.git  
 Configure this project and a new target will be available `run_clang_format`. Just run it.  
 
-10. CMake-Format
+10. CMake-Format  
+
 Format *.cmake/CMakeLists.txt files based on configuration set at `.cmake-format.yaml`. This project is using the instructor's settings.  
 Install using `pip`. This project assumes it is installed in a Virtual Environment `venv`.  
 ```sh
