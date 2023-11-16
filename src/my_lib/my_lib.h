@@ -1,8 +1,8 @@
 #pragma once
 
 /// \file
-#include <iostream>
 #include <cstdint>
+#include <iostream>
 
 #include <nlohmann/json.hpp>
 

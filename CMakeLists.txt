@@ -27,7 +27,10 @@ option(ENABLE_WARNINGS "Enable warnings" ON)
 option(ENABLE_WARNINGS_AS_ERRORS "Enable warnings as errors" OFF)
 
 option(ENABLE_CLANG_TIDY "Enable to add clang tidy." ON)
+option(ENABLE_CLANG_FORMAT "Enable to add clang-format." ON)
 include(Tools)
+
+add_clang_format_target()
 
 if(ENABLE_WARNINGS)
     include(Warnings)

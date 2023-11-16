@@ -1,7 +1,7 @@
 #include <catch2/catch_test_macros.hpp>
 
 #include <my_lib.h>
-                                                        
+
 TEST_CASE("Factorial of 0 is 1 (fail)", "[single-file]")
 {
     REQUIRE(factorial(0) == 1);

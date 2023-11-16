@@ -101,3 +101,9 @@ After installing LLVM above, go to "C:\Program Files\Microsoft Visual Studio\202
 On Windows we need to use "Visual Studio" for this. Open the solution file `projectname.sln` in VS, right click the solution, select "Analyze and Code Cleanup", and then "Run Code Analysis on \<target\>".  
 Remember to enable ENABLE_CLANG_TIDY, and disable ENABLE_SANITIZE_ADDR, ENABLE_SANITIZE_UNDEF and ENABLE_LTO.  
 On Linux, a new target is created as `<target>_clangtidy`, just run it.  
+
+9. Clang-Format
+Format C/C++ files based on configuration set at `.clang-format` file. This project is using the instructor's settings.  
+Make sure that LLVM installation created `clang-format.exe` in LLVM\bin folder.  
+File `tools\run-clang-format.py` is from https://github.com/Sarcasm/run-clang-format.git  
+Configure this project and a new target will be available `run_clang_format`. Just run it.  
