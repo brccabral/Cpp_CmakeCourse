@@ -51,6 +51,7 @@ doxygen # now, it will read Doxygen and generate HTML files
 https://github.com/cpm-cmake/CPM.cmake  
 Download the single file `CPM.cmake`. Copy it to `${CMAKE_MODULE_PATH}`.  
 It can replace the usage of `FetchContent`.  
+Set `-DUSE_CMP=ON`  
 
 5. Conan - Package Manager  
 
@@ -67,7 +68,7 @@ For each dependency, review how to setup `conanfile.py`/`conanfile.txt`.
 conan install . -s build_type=Debug -s compiler.cppstd=17 --output-folder=build --build=missing
 cd build
 # configure (change CMAKE_INSTALL_PREFIX or other values)
-cmake .. -G "Visual Studio 17 2022" -DCMAKE_TOOLCHAIN_FILE=conan_toolchain.cmake -DCMAKE_INSTALL_PREFIX=install_to -DENABLE_SANITIZE_ADDR=OFF -DENABLE_SANITIZE_UNDEF=OFF -DENABLE_LTO=OFF
+cmake .. -G "Visual Studio 17 2022" -DCMAKE_TOOLCHAIN_FILE=conan_toolchain.cmake -DCMAKE_INSTALL_PREFIX=install_to -DENABLE_SANITIZE_ADDR=OFF -DENABLE_SANITIZE_UNDEF=OFF -DENABLE_LTO=OFF -DUSE_CONAN=ON
 # build
 cmake --build . --config Debug --target install
 ```
