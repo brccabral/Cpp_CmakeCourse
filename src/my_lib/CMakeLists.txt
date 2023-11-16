@@ -34,3 +34,7 @@ if(${ENABLE_LTO})
         ON
     )
 endif()
+
+if(${ENABLE_CLANG_TIDY})
+    add_clang_tidy_to_target(${LIBRARY_NAME})
+endif()

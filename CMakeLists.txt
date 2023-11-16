@@ -6,6 +6,10 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
+# CMAKE_EXPORT_COMPILE_COMMANDS = ignored by "Visual Studio 17 2022" generator
+# https://cmake.org/cmake/help/latest/variable/CMAKE_EXPORT_COMPILE_COMMANDS.html
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON CACHE INTERNAL "")
+
 set(LIBRARY_NAME Library)
 set(EXECUTABLE_NAME Executable)
 
@@ -20,14 +24,17 @@ include(Docs)
 include(ConfigSafeGuards)
 
 option(ENABLE_WARNINGS "Enable warnings" ON)
-option(ENABLE_WARNINGS_AS_ERRORS "Enable warnings as errors" ON)
+option(ENABLE_WARNINGS_AS_ERRORS "Enable warnings as errors" OFF)
+
+option(ENABLE_CLANG_TIDY "Enable to add clang tidy." ON)
+include(Tools)
 
 if(ENABLE_WARNINGS)
     include(Warnings)
 endif()
 
-option(ENABLE_SANITIZE_ADDR "Enable ..." ON)
-option(ENABLE_SANITIZE_UNDEF "Enable ..." ON)
+option(ENABLE_SANITIZE_ADDR "Enable ..." OFF)
+option(ENABLE_SANITIZE_UNDEF "Enable ..." OFF)
 option(ENABLE_SANITIZE_LEAK "Enable leak sanitize (Gcc/Clang only)." OFF)
 option(ENABLE_SANITIZE_THREAD "Enable thread sanitize (Gcc/Clang only)." OFF)
 
@@ -39,15 +46,15 @@ endif()
 # Link Time Optimization - Optimizations during linkage
 # it may remove functions that our code doesn't use
 # Do not use together with SANITIZE options
-option(ENABLE_LTO "Enable ..." ON)
+option(ENABLE_LTO "Enable ..." OFF)
 
 if(ENABLE_LTO)
     include(LTO)
 endif()
 
-option(USE_CPM "Whether to use CPM" OFF)
+option(USE_CPM "Whether to use CPM" ON)
 option(USE_CONAN "Whether to use Conan" OFF)
-option(USE_VCPKG "Whether to use VCPKG" ON)
+option(USE_VCPKG "Whether to use VCPKG" OFF)
 
 if(USE_CPM)
     message(STATUS "Using CPM")

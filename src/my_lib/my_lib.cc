@@ -12,6 +12,10 @@ void print_hello_world()
               << NLOHMANN_JSON_VERSION_MAJOR << "."
               << NLOHMANN_JSON_VERSION_MINOR << "."
               << NLOHMANN_JSON_VERSION_PATCH << "\n";
+
+    // Adress Sanitizer should see this :)
+    // if address sanitizer is disabled, Clang-Tidy should alert this too
+    int *x = new int[42];
 }
 
 std::uint32_t factorial(std::uint32_t number)
