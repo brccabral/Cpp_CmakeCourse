@@ -17,6 +17,7 @@ message("COMPILE_EXECUTABLE ${COMPILE_EXECUTABLE}")
 set(CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/cmake/")
 include(AddGitSubmodule) # * name of .cmake file, inside ${PROJECT_SOURCE_DIR}/cmake
 include(Docs)
+include(ConfigSafeGuards)
 
 option(ENABLE_WARNINGS "Enable warnings" ON)
 option(ENABLE_WARNINGS_AS_ERRORS "Enable warnings as errors" ON)
