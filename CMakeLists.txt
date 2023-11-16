@@ -24,8 +24,8 @@ option(COMPILE_EXECUTABLE "Whether to compile the executable" ON)
 message("COMPILE_EXECUTABLE ${COMPILE_EXECUTABLE}")
 
 set(CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/cmake/")
-include(AddGitSubmodule
-)# * name of .cmake file, inside ${PROJECT_SOURCE_DIR}/cmake
+# * AddGitSubmodule is the name of AddGitSubmodule.cmake file, inside ${PROJECT_SOURCE_DIR}/cmake
+include(AddGitSubmodule)
 include(Docs)
 include(ConfigSafeGuards)
 
