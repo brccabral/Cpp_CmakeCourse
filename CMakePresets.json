@@ -12,7 +12,7 @@
                 "rhs": "Windows"
             },
             "cacheVariables": {
-                "VCPKG_DIR":"${sourceDir}/../vcpkg"
+                "VCPKG_DIR": "${sourceDir}/../vcpkg"
             }
         },
         {
@@ -60,6 +60,24 @@
             }
         },
         {
+            "name": "clang-x64-debug",
+            "displayName": "Win Clang x64 Debug",
+            "inherits": "x64-debug",
+            "toolset": "ClangCL",
+            "cacheVariables": {
+                "CMAKE_GENERATOR_TOOLSET": "ClangCL"
+            }
+        },
+        {
+            "name": "clang-x64-release",
+            "displayName": "Win Clang x64 Release",
+            "inherits": "clang-x64-debug",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Release",
+                "CMAKE_GENERATOR_TOOLSET": "ClangCL"
+            }
+        },
+        {
             "name": "linux-debug",
             "displayName": "Linux Debug",
             "description": "Sets GCC",
@@ -99,6 +117,12 @@
             "description": "Vanilla build"
         },
         {
+            "name": "clang-build-windows",
+            "displayName": "Win Clang",
+            "configurePreset": "clang-x64-debug",
+            "description": "Clang Windows Debug"
+        },
+        {
             "name": "release-build-linux",
             "displayName": "Linux Release",
             "configurePreset": "linux-release",
@@ -111,6 +135,13 @@
             "configurePreset": "x64-release",
             "configuration": "Release",
             "description": "Windows Release build"
+        },
+        {
+            "name": "clang-release-build-windows",
+            "displayName": "Win Release Clang",
+            "configurePreset": "clang-x64-release",
+            "configuration": "Release",
+            "description": "Clang Windows Release"
         }
     ],
     "testPresets": [
