@@ -28,6 +28,8 @@ endif()
 
 option(ENABLE_SANITIZE_ADDR "Enable ..." ON)
 option(ENABLE_SANITIZE_UNDEF "Enable ..." ON)
+option(ENABLE_SANITIZE_LEAK "Enable leak sanitize (Gcc/Clang only)." OFF)
+option(ENABLE_SANITIZE_THREAD "Enable thread sanitize (Gcc/Clang only)." OFF)
 
 if(ENABLE_SANITIZE_ADDR OR ENABLE_SANITIZE_UNDEF)
     include(Sanitizers)
