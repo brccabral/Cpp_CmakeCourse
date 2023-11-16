@@ -26,11 +26,56 @@ include(ConfigSafeGuards)
 option(ENABLE_WARNINGS "Enable warnings" ON)
 option(ENABLE_WARNINGS_AS_ERRORS "Enable warnings as errors" OFF)
 
+# search for python
+find_package(Python3 COMPONENTS Interpreter)
+
+if(NOT ${Python3_FOUND})
+    message(SEND_ERROR "Python not found")
+endif()
+
+# search python virtual environment in "venv" folder
+set(ENV{VIRTUAL_ENV} "${PROJECT_SOURCE_DIR}/venv")
+
+# force virtualenv search
+set(Python3_FIND_VIRTUALENV ONLY)
+
+# unset previous variables
+unset(Python3_EXECUTABLE)
+unset(Python3_FOUND)
+
+# search venv
+find_package(Python3 COMPONENTS Interpreter)
+
+# if not venv found, create it
+if(NOT ${Python3_FOUND})
+    message(STATUS "Creating python ${PROJECT_SOURCE_DIR}/venv")
+
+    # re-search to set Python3_EXECUTABLE back to system python
+    set(Python3_FIND_VIRTUALENV STANDARD)
+    find_package(Python3 COMPONENTS Interpreter)
+
+    # create the venv
+    execute_process(COMMAND "${Python3_EXECUTABLE}" -m venv
+                            "${PROJECT_SOURCE_DIR}/venv")
+
+    # re-search
+    unset(Python3_EXECUTABLE)
+    unset(Python3_FOUND)
+    set(Python3_FIND_VIRTUALENV ONLY)
+    find_package(Python3 COMPONENTS Interpreter)
+
+    if(NOT ${Python3_FOUND})
+        message(SEND_ERROR "Error creating python venv")
+    endif()
+endif()
+
 option(ENABLE_CLANG_TIDY "Enable to add clang tidy." ON)
 option(ENABLE_CLANG_FORMAT "Enable to add clang-format." ON)
+option(ENABLE_CMAKE_FORMAT "Enable to add cmake-format." ON)
 include(Tools)
 
 add_clang_format_target()
+add_cmake_format_target()
 
 if(ENABLE_WARNINGS)
     include(Warnings)

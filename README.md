@@ -107,3 +107,13 @@ Format C/C++ files based on configuration set at `.clang-format` file. This proj
 Make sure that LLVM installation created `clang-format.exe` in LLVM\bin folder.  
 File `tools\run-clang-format.py` is from https://github.com/Sarcasm/run-clang-format.git  
 Configure this project and a new target will be available `run_clang_format`. Just run it.  
+
+10. CMake-Format
+Format *.cmake/CMakeLists.txt files based on configuration set at `.cmake-format.yaml`. This project is using the instructor's settings.  
+Install using `pip`. This project assumes it is installed in a Virtual Environment `venv`.  
+```sh
+python -m venv $project/venv
+$project/venv/Scripts/activate.bat
+pip install cmake-format
+```
+Configure this project and a new target will be available `run_cmake_format`. Just run it.  

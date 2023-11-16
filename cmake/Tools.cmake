@@ -80,3 +80,41 @@ function(add_clang_format_target)
         message(WARNING "CLANGFORMAT NOT FOUND")
     endif()
 endfunction()
+
+function(add_cmake_format_target)
+    if(NOT ${ENABLE_CMAKE_FORMAT})
+        return()
+    endif()
+    set(ROOT_CMAKE_FILES "${CMAKE_SOURCE_DIR}/CMakeLists.txt")
+    file(GLOB_RECURSE CMAKE_FILES_TXT "*/CMakeLists.txt")
+    file(GLOB_RECURSE CMAKE_FILES_C "cmake/*.cmake")
+    list(
+        FILTER
+        CMAKE_FILES_TXT
+        EXCLUDE
+        REGEX
+        "${CMAKE_SOURCE_DIR}/(out|build|external)/.*")
+    set(CMAKE_FILES ${ROOT_CMAKE_FILES} ${CMAKE_FILES_TXT} ${CMAKE_FILES_C})
+    find_program(CMAKE_FORMAT ${PROJECT_SOURCE_DIR}/venv/Scripts/cmake-format)
+    if(CMAKE_FORMAT)
+        message(STATUS "Added Cmake Format")
+        set(FORMATTING_COMMANDS)
+        foreach(cmake_file ${CMAKE_FILES})
+            list(
+                APPEND
+                FORMATTING_COMMANDS
+                COMMAND
+                ${PROJECT_SOURCE_DIR}/venv/Scripts/cmake-format
+                -c
+                ${CMAKE_SOURCE_DIR}/.cmake-format.yaml
+                -i
+                ${cmake_file})
+        endforeach()
+        add_custom_target(
+            run_cmake_format
+            COMMAND ${FORMATTING_COMMANDS}
+            WORKING_DIRECTORY ${CMAKE_SOURCE_DIR})
+    else()
+        message(WARNING "CMAKE_FORMAT NOT FOUND")
+    endif()
+endfunction()
