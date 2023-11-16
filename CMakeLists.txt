@@ -1,5 +1,8 @@
 cmake_minimum_required(VERSION 3.21)
-project(CmakeCourse VERSION 1.0.0 LANGUAGES C CXX)
+project(
+    CmakeCourse
+    VERSION 1.0.0
+    LANGUAGES C CXX)
 
 # set() creates a variable to be used in all CMakeLists.txt
 set(CMAKE_CXX_STANDARD 17)
@@ -8,7 +11,9 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 
 # CMAKE_EXPORT_COMPILE_COMMANDS = ignored by "Visual Studio 17 2022" generator
 # https://cmake.org/cmake/help/latest/variable/CMAKE_EXPORT_COMPILE_COMMANDS.html
-set(CMAKE_EXPORT_COMPILE_COMMANDS ON CACHE INTERNAL "")
+set(CMAKE_EXPORT_COMPILE_COMMANDS
+    ON
+    CACHE INTERNAL "")
 
 set(LIBRARY_NAME Library)
 set(EXECUTABLE_NAME Executable)
@@ -19,7 +24,8 @@ option(COMPILE_EXECUTABLE "Whether to compile the executable" ON)
 message("COMPILE_EXECUTABLE ${COMPILE_EXECUTABLE}")
 
 set(CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/cmake/")
-include(AddGitSubmodule) # * name of .cmake file, inside ${PROJECT_SOURCE_DIR}/cmake
+include(AddGitSubmodule
+)# * name of .cmake file, inside ${PROJECT_SOURCE_DIR}/cmake
 include(Docs)
 include(ConfigSafeGuards)
 
@@ -146,8 +152,7 @@ else()
         nlohmann_json
         GIT_REPOSITORY https://github.com/nlohmann/json
         GIT_TAG v3.11.2
-        GIT_SHALLOW TRUE
-    )
+        GIT_SHALLOW TRUE)
     FetchContent_MakeAvailable(nlohmann_json)
 
     # Format Strings
@@ -155,8 +160,7 @@ else()
         fmt
         GIT_REPOSITORY https://github.com/fmtlib/fmt
         GIT_TAG 10.1.1
-        GIT_SHALLOW TRUE
-    )
+        GIT_SHALLOW TRUE)
     FetchContent_MakeAvailable(fmt)
 
     # Logging
@@ -164,8 +168,7 @@ else()
         spdlog
         GIT_REPOSITORY https://github.com/gabime/spdlog
         GIT_TAG v1.12.0
-        GIT_SHALLOW TRUE
-    )
+        GIT_SHALLOW TRUE)
     FetchContent_MakeAvailable(spdlog)
 
     # Command Line arguments parser
@@ -173,8 +176,7 @@ else()
         cxxopts
         GIT_REPOSITORY https://github.com/jarro2783/cxxopts
         GIT_TAG v3.1.1
-        GIT_SHALLOW TRUE
-    )
+        GIT_SHALLOW TRUE)
     FetchContent_MakeAvailable(cxxopts)
 
     # Unit test
@@ -182,8 +184,7 @@ else()
         Catch2
         GIT_REPOSITORY https://github.com/catchorg/Catch2
         GIT_TAG v3.4.0
-        GIT_SHALLOW TRUE
-    )
+        GIT_SHALLOW TRUE)
     FetchContent_MakeAvailable(Catch2)
 endif()
 

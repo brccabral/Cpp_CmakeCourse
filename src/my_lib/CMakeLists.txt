@@ -1,19 +1,10 @@
-set(LIBRARY_SOURCES
-    "${CMAKE_CURRENT_SOURCE_DIR}/my_lib.cc")
-set(LIBRARY_HEADERS
-    "${CMAKE_CURRENT_SOURCE_DIR}/my_lib.h")
-set(LIBRARY_INCLUDES
-    "./"
-    "${CMAKE_BINARY_DIR}/configured_files/include"
-)
+set(LIBRARY_SOURCES "${CMAKE_CURRENT_SOURCE_DIR}/my_lib.cc")
+set(LIBRARY_HEADERS "${CMAKE_CURRENT_SOURCE_DIR}/my_lib.h")
+set(LIBRARY_INCLUDES "./" "${CMAKE_BINARY_DIR}/configured_files/include")
 
 add_library(${LIBRARY_NAME} STATIC ${LIBRARY_SOURCES})
-target_include_directories(${LIBRARY_NAME} PUBLIC
-    ${LIBRARY_INCLUDES}
-)
-target_link_libraries(${LIBRARY_NAME} PRIVATE
-    nlohmann_json::nlohmann_json
-)
+target_include_directories(${LIBRARY_NAME} PUBLIC ${LIBRARY_INCLUDES})
+target_link_libraries(${LIBRARY_NAME} PRIVATE nlohmann_json::nlohmann_json)
 
 if(${ENABLE_WARNINGS})
     target_set_warnings(
@@ -22,8 +13,7 @@ if(${ENABLE_WARNINGS})
         ENABLE
         ${ENABLE_WARNINGS}
         AS_ERRORS
-        ${ENABLE_WARNINGS_AS_ERRORS}
-    )
+        ${ENABLE_WARNINGS_AS_ERRORS})
 endif()
 
 if(${ENABLE_LTO})
@@ -31,8 +21,7 @@ if(${ENABLE_LTO})
         TARGET
         ${LIBRARY_NAME}
         ENABLE
-        ON
-    )
+        ON)
 endif()
 
 if(${ENABLE_CLANG_TIDY})

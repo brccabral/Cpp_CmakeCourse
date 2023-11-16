@@ -6,7 +6,9 @@ function(add_sanitizer_flags)
         return()
     endif()
 
-    if(CMAKE_CXX_COMPILER_ID MATCHES "CLANG" OR CMAKE_CXX_COMPILER_ID MATCHES "Clang" OR CMAKE_CXX_COMPILER_ID MATCHES "GNU")
+    if(CMAKE_CXX_COMPILER_ID MATCHES "CLANG"
+       OR CMAKE_CXX_COMPILER_ID MATCHES "Clang"
+       OR CMAKE_CXX_COMPILER_ID MATCHES "GNU")
         if(CMAKE_CXX_COMPILER_ID MATCHES "GNU")
             add_compile_options("-fno-omit-frame-pointer")
             add_link_options("-fno-omit-frame-pointer")
@@ -52,6 +54,9 @@ function(add_sanitizer_flags)
             message(STATUS "sanitize=thread not avail. for MSVC")
         endif()
     else()
-        message(SEND_ERROR "Compiler ${CMAKE_CXX_COMPILER_ID} not supported for sanitizers.")
+        message(
+            SEND_ERROR
+                "Compiler ${CMAKE_CXX_COMPILER_ID} not supported for sanitizers."
+        )
     endif()
 endfunction()

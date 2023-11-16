@@ -17,8 +17,9 @@ function(target_enable_lto)
     check_ipo_supported(RESULT result OUTPUT output)
 
     if(result)
-    message(STATUS "IPO/LTO is supported: ${LTO_TARGET}")
-        set_property(TARGET ${LTO_TARGET} PROPERTY INTERPROCEDURAL_OPTIMIZATION ${LTO_ENABLE})
+        message(STATUS "IPO/LTO is supported: ${LTO_TARGET}")
+        set_property(TARGET ${LTO_TARGET} PROPERTY INTERPROCEDURAL_OPTIMIZATION
+                                                   ${LTO_ENABLE})
         target_compile_options(${LTO_TARGET} PUBLIC "-Gy")
         target_link_options(${LTO_TARGET} PUBLIC "-LTCG")
     else()
