@@ -121,3 +121,14 @@ $project/venv/Scripts/activate.bat
 pip install cmake-format
 ```
 Configure this project and a new target will be available `run_cmake_format`. Just run it.  
+
+11. GitHub Pages
+Open your reporsitory in GitHub, go to Settings, then Pages.  
+In section "Build and deployment" select "GitHub Actions" and create a "Custom Action".  
+Put the contents from this project `.github\workflows\documentation.yml` and commit the changes.  
+Back to Settings, on left pane select "Actions" (not Actions from GitHub navigation tab, but the left pane in Settings), then choose "General".  
+Scroll down and go to "Workflow permissions", allow "Read and write permissions" and save.  
+Now, go to Actions from GitHub navigation tab and check the status of the new created action.  
+Once it is done, go back to Settings, and in "Build and deployment", in "Source" drop down select "Deploy from a branch".  
+The action will have created a branch in you repository called "gh-pages". Select it as your page branch, leave root/ selected and save.  
+In your repository main page there will be a section on the right called "Deplyments" and it will contain the link to open the page created.  
