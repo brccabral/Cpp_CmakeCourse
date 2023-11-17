@@ -169,3 +169,19 @@ It will create a new directory `coverage` inside your build directory which will
 
 In the course the instructor shows how to integrate https://codecov.io with GitHub Actions, but I am not going to do that in this project.  
 The instructors adds a new command in "Ubuntu CI Test" that uploads the coverage results to codecov.io, but it requires to allow codecov.io to access my GitHub account which I am not willing to do for this course.  
+
+14. Pre-commit  
+
+When a user tries to commit, a set of actions described `.pre-commit-config.yaml` is executed before the commit takes effect. If any error, the commit is not saved and a log message is presented to the user to make the corrections before another "Staged/Commit".  
+```sh
+pip install pre-commit
+pre-commit install
+# install-hooks will look into .pre-commit-config.yaml and load the repos into this project .git/hooks/pre-commit
+pre-commit install-hooks 
+```
+The `clang-tidy` command is something like this:  
+```sh
+clang-tidy src/*.cpp -- -Ipath/to/include
+```
+Where everything after `--` is simulating flags passed to the compiler. More complex builds need more flags.  
+If you have exported the commands with CMAKE_EXPORT_COMPILE_COMMANDS (only for Makefile Generators and Ninja Generators), we can pass the location of `compile_commands.json` with `clang-tidy -p=directory/`, just the directory containg the file.  
