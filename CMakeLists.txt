@@ -196,6 +196,13 @@ else()
     FetchContent_MakeAvailable(Catch2)
 endif()
 
+# ENABLE_COVERAGE must come before "add_subdirectory(src)"
+option(ENABLE_COVERAGE "Enable a Code Coverage build." OFF)
+if(ENABLE_COVERAGE)
+    include(CodeCoverage)
+    append_coverage_compiler_flags()
+endif()
+
 add_subdirectory(external)
 add_subdirectory(configured)
 

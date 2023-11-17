@@ -136,7 +136,8 @@ pip install cmake-format
 ```
 Configure this project and a new target will be available `run_cmake_format`. Just run it.  
 
-11. GitHub Pages
+11. GitHub Pages  
+
 Open your reporsitory in GitHub, go to Settings, then Pages.  
 In section "Build and deployment" select "GitHub Actions" and create a "Custom Action".  
 Put the contents from this project `.github\workflows\documentation.yml` and commit the changes.  
@@ -146,3 +147,13 @@ Now, go to Actions from GitHub navigation tab and check the status of the new cr
 Once it is done, go back to Settings, and in "Build and deployment", in "Source" drop down select "Deploy from a branch".  
 The action will have created a branch in you repository called "gh-pages". Select it as your page branch, leave root/ selected and save.  
 In your repository main page there will be a section on the right called "Deplyments" and it will contain the link to open the page created.  
+
+12. Code Coverage  
+
+Linux only.  
+Checks if your unit tests are testing as much as possible your code (for example, if you have tests for different if/else code flow).  
+```sh
+apt install gcovr lcov
+```
+After configuring this project with -DENABLE_COVERAGE=ON, a new target `coverage` will be available. Just run it.  
+It will create a new directory `coverage` inside your build directory which will contain an `index.html` file with the results.  
