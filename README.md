@@ -164,3 +164,8 @@ apt install gcovr lcov
 ```
 After configuring this project with -DENABLE_COVERAGE=ON, a new target `coverage` will be available. Just run it.  
 It will create a new directory `coverage` inside your build directory which will contain an `index.html` file with the results.  
+
+13. CodeCov.io  
+
+In the course the instructor shows how to integrate https://codecov.io with GitHub Actions, but I am not going to do that in this project.  
+The instructors adds a new command in "Ubuntu CI Test" that uploads the coverage results to codecov.io, but it requires to allow codecov.io to access my GitHub account which I am not willing to do for this course.  
