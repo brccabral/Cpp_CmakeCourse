@@ -6,6 +6,7 @@ function(add_clang_tidy_to_target target)
         INCLUDE
         REGEX
         ".*.(cc|h|cpp|hpp)")
+    message("TARGET_SOURCES ${TARGET_SOURCES}")
 
     find_package(Python3 COMPONENTS Interpreter)
     if(NOT ${Python_FOUND})
@@ -50,15 +51,35 @@ function(add_clang_format_target)
     if(NOT ${Python_FOUND})
         return()
     endif()
-    file(GLOB_RECURSE CMAKE_FILES_CC "*/*.cc")
-    file(GLOB_RECURSE CMAKE_FILES_CPP "*/*.cpp")
-    file(GLOB_RECURSE CMAKE_FILES_H "*/*.h")
-    file(GLOB_RECURSE CMAKE_FILES_HPP "*/*.hpp")
+    # include only project directories
+    set(CLANG_FORMAT_DIRS
+        "${PROJECT_SOURCE_DIR}/app"
+        "${PROJECT_SOURCE_DIR}/coverage"
+        "${PROJECT_SOURCE_DIR}/tests"
+        "${PROJECT_SOURCE_DIR}/src")
+    foreach(clang_formar_dir ${CLANG_FORMAT_DIRS})
+        list(APPEND CMAKE_DIRS_CC "${clang_formar_dir}/*.cc")
+    endforeach()
+    foreach(clang_formar_dir ${CLANG_FORMAT_DIRS})
+        list(APPEND CMAKE_DIRS_CPP "${clang_formar_dir}/*.cpp")
+    endforeach()
+    foreach(clang_formar_dir ${CLANG_FORMAT_DIRS})
+        list(APPEND CMAKE_DIRS_H "${clang_formar_dir}/*.h")
+    endforeach()
+    foreach(clang_formar_dir ${CLANG_FORMAT_DIRS})
+        list(APPEND CMAKE_DIRS_HPP "${clang_formar_dir}/*.hpp")
+    endforeach()
+
+    file(GLOB_RECURSE CMAKE_FILES_CC ${CMAKE_DIRS_CC})
+    file(GLOB_RECURSE CMAKE_FILES_CPP ${CMAKE_DIRS_CPP})
+    file(GLOB_RECURSE CMAKE_FILES_H ${CMAKE_DIRS_H})
+    file(GLOB_RECURSE CMAKE_FILES_HPP ${CMAKE_DIRS_HPP})
     set(CPP_FILES
         ${CMAKE_FILES_CC}
         ${CMAKE_FILES_CPP}
         ${CMAKE_FILES_H}
         ${CMAKE_FILES_HPP})
+    message("CPP_FILES ${CPP_FILES}")
     list(
         FILTER
         CPP_FILES
@@ -86,7 +107,14 @@ function(add_cmake_format_target)
         return()
     endif()
     set(ROOT_CMAKE_FILES "${CMAKE_SOURCE_DIR}/CMakeLists.txt")
-    file(GLOB_RECURSE CMAKE_FILES_TXT "*/CMakeLists.txt")
+    # include only project directories
+    file(
+        GLOB_RECURSE
+        CMAKE_FILES_TXT
+        "${PROJECT_SOURCE_DIR}/app/CMakeLists.txt"
+        "${PROJECT_SOURCE_DIR}/configured/CMakeLists.txt"
+        "${PROJECT_SOURCE_DIR}/tests/CMakeLists.txt"
+        "${PROJECT_SOURCE_DIR}/src/CMakeLists.txt")
     file(GLOB_RECURSE CMAKE_FILES_C "cmake/*.cmake")
     list(
         FILTER
@@ -95,6 +123,7 @@ function(add_cmake_format_target)
         REGEX
         "${CMAKE_SOURCE_DIR}/(out|build|external)/.*")
     set(CMAKE_FILES ${ROOT_CMAKE_FILES} ${CMAKE_FILES_TXT} ${CMAKE_FILES_C})
+    message("CMAKE_FILES ${CMAKE_FILES}")
     find_program(CMAKE_FORMAT ${PYTHON_VENV_BIN}/cmake-format)
     if(CMAKE_FORMAT)
         message(STATUS "Added Cmake Format")
