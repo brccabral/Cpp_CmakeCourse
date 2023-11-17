@@ -1,0 +1,36 @@
+fail_fast: false
+repos:
+-   repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.4.0
+    hooks:
+      - id: check-yaml
+      - id: check-json
+        exclude: .vscode
+      - id: end-of-file-fixer
+        exclude: docs
+      - id: trailing-whitespace
+        exclude: docs
+        exclude_types: [markdown]
+
+-   repo: https://github.com/pocc/pre-commit-hooks
+    rev: v1.3.5
+    hooks:
+      - id: clang-tidy
+        args: ['-config-file=.clang-tidy',
+        '--',
+        '-std=c++17',
+        '-Isrc/my_lib',
+        '-Iout/build/x64-debug/configured_files/include',
+        '-Iout/build/x64-debug/_deps/nlohmann_json-src/include',
+        '-Iout/build/x64-debug/_deps/fmt-src/include',
+        '-Iout/build/x64-debug/_deps/cxxopts-src/include',
+        '-Iout/build/x64-debug/_deps/spdlog-src/include',
+        '-Iout/build/x64-debug/_deps/catch2-src/src',
+        '-Iout/build/x64-debug/_deps/catch2-build/generated-includes'
+        ]
+
+-   repo: https://github.com/pre-commit/mirrors-clang-format
+    rev: 'v16.0.2'
+    hooks:
+      - id: clang-format
+        exclude_types: [javascript, json]

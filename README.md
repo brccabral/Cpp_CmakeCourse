@@ -189,3 +189,11 @@ Run this command to check if all is passing.
 ```sh
 pre-commit run --all-files
 ```
+On Windows, need to use `pre-commit-windows\.pre-commit-config.yaml` because "Visual Studio 17 2022" generator can't export `compile_commands.json`, not even setting CMAKE_EXPORT_COMPILE_COMMANDS.  
+This `pre-commit-windows` has different setup for `clang-tidy`.  
+Before running it, run the windows preset `x64-debug` so it can prepare the dependencies, then run `pre-commit`.  
+```sh
+cmake --preset x64-debug
+cd pre-commit-windows
+pre-commit run --all-files
+```
