@@ -9,6 +9,7 @@ repos:
       - id: end-of-file-fixer
         exclude: docs
       - id: trailing-whitespace
+        exclude: docs
         exclude_types: [markdown]
 
 -   repo: https://github.com/pocc/pre-commit-hooks

@@ -185,3 +185,7 @@ clang-tidy src/*.cpp -- -Ipath/to/include
 ```
 Where everything after `--` is simulating flags passed to the compiler. More complex builds need more flags.  
 If you have exported the commands with CMAKE_EXPORT_COMPILE_COMMANDS (only for Makefile Generators and Ninja Generators), we can pass the location of `compile_commands.json` with `clang-tidy -p=directory/`, just the directory containg the file.  
+Run this command to check if all is passing.  
+```sh
+pre-commit run --all-files
+```
