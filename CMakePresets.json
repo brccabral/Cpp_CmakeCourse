@@ -6,20 +6,35 @@
             "hidden": true,
             "binaryDir": "${sourceDir}/out/build/${presetName}",
             "installDir": "${sourceDir}/out/install/${presetName}",
+            "cacheVariables": {
+                "VCPKG_DIR": "out/vcpkg"
+            }
+        },
+        {
+            "name": "base-windows",
+            "hidden": true,
+            "inherits": "base",
             "condition": {
                 "type": "equals",
                 "lhs": "${hostSystemName}",
                 "rhs": "Windows"
-            },
-            "cacheVariables": {
-                "VCPKG_DIR": "${sourceDir}/../vcpkg"
+            }
+        },
+        {
+            "name": "base-linux",
+            "hidden": true,
+            "inherits": "base",
+            "condition": {
+                "type": "equals",
+                "lhs": "${hostSystemName}",
+                "rhs": "Linux"
             }
         },
         {
             "name": "x64-debug",
             "displayName": "Win x64 Debug",
             "description": "Sets debug build type and x64 arch",
-            "inherits": "base",
+            "inherits": "base-windows",
             "architecture": {
                 "value": "x64",
                 "strategy": "external"
@@ -41,7 +56,7 @@
             "name": "x86-debug",
             "displayName": "Win x86 Debug ",
             "description": "Sets debug build type and x86 arch",
-            "inherits": "base",
+            "inherits": "base-windows",
             "architecture": {
                 "value": "x86",
                 "strategy": "external"
@@ -80,24 +95,36 @@
         {
             "name": "linux-debug",
             "displayName": "Linux Debug",
-            "description": "Sets GCC",
-            "inherits": "base",
+            "description": "Linux Debug",
+            "inherits": "base-linux",
             "cacheVariables": {
-                "CMAKE_C_COMPILER": "gcc",
-                "CMAKE_CXX_COMPILER": "g++",
                 "CMAKE_BUILD_TYPE": "Debug"
-            },
-            "condition": {
-                "type": "equals",
-                "lhs": "${hostSystemName}",
-                "rhs": "Linux"
             }
         },
         {
             "name": "linux-release",
             "displayName": "Linux Release",
-            "description": "Sets release build type",
+            "description": "Linux Release",
             "inherits": "linux-debug",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Release"
+            }
+        },
+        {
+            "name": "linux-clang-debug",
+            "displayName": "Linux Clang Debug",
+            "description": "Linux Clang Debug",
+            "inherits": "linux-debug",
+            "cacheVariables": {
+                "CMAKE_C_COMPILER": "clang",
+                "CMAKE_CXX_COMPILER": "clang++"
+            }
+        },
+        {
+            "name": "linux-clang-release",
+            "displayName": "Linux Clang Release",
+            "description": "Linux Clang Release",
+            "inherits": "linux-clang-debug",
             "cacheVariables": {
                 "CMAKE_BUILD_TYPE": "Release"
             }
@@ -123,6 +150,12 @@
             "description": "Clang Windows Debug"
         },
         {
+            "name": "clang-build-linux",
+            "displayName": "Linux Clang",
+            "configurePreset": "linux-clang-debug",
+            "description": "Clang Linux Debug"
+        },
+        {
             "name": "release-build-linux",
             "displayName": "Linux Release",
             "configurePreset": "linux-release",
@@ -142,6 +175,12 @@
             "configurePreset": "clang-x64-release",
             "configuration": "Release",
             "description": "Clang Windows Release"
+        },
+        {
+            "name": "clang-relase-build-linux",
+            "displayName": "Linux Clang Release",
+            "configurePreset": "linux-clang-release",
+            "description": "Clang Linux Release"
         }
     ],
     "testPresets": [

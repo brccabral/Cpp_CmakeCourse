@@ -14,10 +14,17 @@ https://www.graphviz.org/download/
 **Install Doxygen (Graphviz dependency).**  
 https://www.doxygen.nl/download.html  
 Put `Graphviz\bin` and `doxygen\bin` on `%PATH%`.  
-```
+Windows  
+```bat
 cd out\build\x64-debug
 cmake ..\..\.. --graphviz=graph.dot
 dot.exe -Tpng graph.dot -o graph.png
+```
+Linux  
+```sh
+cd out/build/linux-debug
+cmake ../../.. --graphviz=graph.dot
+dot -Tpng graph.dot -o graph.png
 ```
 
 3. Doxygen - Generates HTML documentation based on code comments  
@@ -68,12 +75,19 @@ For each dependency, review how to setup `conanfile.py`/`conanfile.txt`.
 conan install . -s build_type=Debug -s compiler.cppstd=17 --output-folder=build --build=missing
 cd build
 # configure (change CMAKE_INSTALL_PREFIX or other values)
-cmake .. -G "Visual Studio 17 2022" -DCMAKE_TOOLCHAIN_FILE=conan_toolchain.cmake -DCMAKE_INSTALL_PREFIX=install_to -DENABLE_SANITIZE_ADDR=OFF -DENABLE_SANITIZE_UNDEF=OFF -DENABLE_LTO=OFF -DUSE_CONAN=ON
+cmake .. -G "Visual Studio 17 2022" -DCMAKE_TOOLCHAIN_FILE=conan_toolchain.cmake -DCMAKE_INSTALL_PREFIX=install_to -DENABLE_SANITIZE_ADDR=OFF -DENABLE_SANITIZE_UNDEF=OFF -DENABLE_LTO=OFF -DUSE_CONAN=ON -DUSE_CPM=OFF
 # build
 cmake --build . --config Debug --target install
 ```
 In VSCode, select `conan-default` as config preset.  
 Conan pre-builds the dependencies without applying Sanitizer or LTO. Need to disable them before building this project.  
+For some reason conan presets are not showing in VSCode on Linux. Run these commands:  
+```sh
+cmake --list-presets
+cmake --preset conan-debug
+cmake --build --list-presets
+cmake --build --preset conan-debug --target install
+```
 
 6. VCPKG - Package Manager  
 

@@ -95,7 +95,7 @@ function(add_cmake_format_target)
         REGEX
         "${CMAKE_SOURCE_DIR}/(out|build|external)/.*")
     set(CMAKE_FILES ${ROOT_CMAKE_FILES} ${CMAKE_FILES_TXT} ${CMAKE_FILES_C})
-    find_program(CMAKE_FORMAT ${PROJECT_SOURCE_DIR}/venv/Scripts/cmake-format)
+    find_program(CMAKE_FORMAT ${PYTHON_VENV_BIN}/cmake-format)
     if(CMAKE_FORMAT)
         message(STATUS "Added Cmake Format")
         set(FORMATTING_COMMANDS)
@@ -104,7 +104,7 @@ function(add_cmake_format_target)
                 APPEND
                 FORMATTING_COMMANDS
                 COMMAND
-                ${PROJECT_SOURCE_DIR}/venv/Scripts/cmake-format
+                ${PYTHON_VENV_BIN}/cmake-format
                 -c
                 ${CMAKE_SOURCE_DIR}/.cmake-format.yaml
                 -i

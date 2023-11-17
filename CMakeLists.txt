@@ -39,8 +39,17 @@ if(NOT ${Python3_FOUND})
     message(SEND_ERROR "Python not found")
 endif()
 
+if(WIN32)
+    set(PYTHON_VENV "${PROJECT_SOURCE_DIR}/venv")
+    set(PYTHON_VENV_BIN "${PYTHON_VENV}/Scripts")
+else()
+    set(PYTHON_VENV "${PROJECT_SOURCE_DIR}/.venv")
+    set(PYTHON_VENV_BIN "${PYTHON_VENV}/bin")
+endif()
+message("PYTHON_VENV_BIN ${PYTHON_VENV_BIN}")
+
 # search python virtual environment in "venv" folder
-set(ENV{VIRTUAL_ENV} "${PROJECT_SOURCE_DIR}/venv")
+set(ENV{VIRTUAL_ENV} "${PYTHON_VENV}")
 
 # force virtualenv search
 set(Python3_FIND_VIRTUALENV ONLY)
@@ -54,15 +63,14 @@ find_package(Python3 COMPONENTS Interpreter)
 
 # if not venv found, create it
 if(NOT ${Python3_FOUND})
-    message(STATUS "Creating python ${PROJECT_SOURCE_DIR}/venv")
+    message(STATUS "Creating python ${PYTHON_VENV}")
 
     # re-search to set Python3_EXECUTABLE back to system python
     set(Python3_FIND_VIRTUALENV STANDARD)
     find_package(Python3 COMPONENTS Interpreter)
 
     # create the venv
-    execute_process(COMMAND "${Python3_EXECUTABLE}" -m venv
-                            "${PROJECT_SOURCE_DIR}/venv")
+    execute_process(COMMAND "${Python3_EXECUTABLE}" -m venv "${PYTHON_VENV}")
 
     # re-search
     unset(Python3_EXECUTABLE)
