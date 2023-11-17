@@ -39,53 +39,57 @@ if(NOT ${Python3_FOUND})
     message(SEND_ERROR "Python not found")
 endif()
 
-if(WIN32)
-    set(PYTHON_VENV "${PROJECT_SOURCE_DIR}/venv")
-    set(PYTHON_VENV_BIN "${PYTHON_VENV}/Scripts")
-else()
-    set(PYTHON_VENV "${PROJECT_SOURCE_DIR}/.venv")
-    set(PYTHON_VENV_BIN "${PYTHON_VENV}/bin")
-endif()
-message("PYTHON_VENV_BIN ${PYTHON_VENV_BIN}")
+option(ENABLE_CLANG_TIDY "Enable to add clang tidy." OFF)
+option(ENABLE_CLANG_FORMAT "Enable to add clang-format." OFF)
+option(ENABLE_CMAKE_FORMAT "Enable to add cmake-format." OFF)
 
-# search python virtual environment in "venv" folder
-set(ENV{VIRTUAL_ENV} "${PYTHON_VENV}")
+if(ENABLE_CMAKE_FORMAT)
+    if(WIN32)
+        set(PYTHON_VENV "${PROJECT_SOURCE_DIR}/venv")
+        set(PYTHON_VENV_BIN "${PYTHON_VENV}/Scripts")
+    else()
+        set(PYTHON_VENV "${PROJECT_SOURCE_DIR}/.venv")
+        set(PYTHON_VENV_BIN "${PYTHON_VENV}/bin")
+    endif()
+    message("PYTHON_VENV_BIN ${PYTHON_VENV_BIN}")
 
-# force virtualenv search
-set(Python3_FIND_VIRTUALENV ONLY)
+    # search python virtual environment in "venv" folder
+    set(ENV{VIRTUAL_ENV} "${PYTHON_VENV}")
 
-# unset previous variables
-unset(Python3_EXECUTABLE)
-unset(Python3_FOUND)
+    # force virtualenv search
+    set(Python3_FIND_VIRTUALENV ONLY)
 
-# search venv
-find_package(Python3 COMPONENTS Interpreter)
-
-# if not venv found, create it
-if(NOT ${Python3_FOUND})
-    message(STATUS "Creating python ${PYTHON_VENV}")
-
-    # re-search to set Python3_EXECUTABLE back to system python
-    set(Python3_FIND_VIRTUALENV STANDARD)
-    find_package(Python3 COMPONENTS Interpreter)
-
-    # create the venv
-    execute_process(COMMAND "${Python3_EXECUTABLE}" -m venv "${PYTHON_VENV}")
-
-    # re-search
+    # unset previous variables
     unset(Python3_EXECUTABLE)
     unset(Python3_FOUND)
-    set(Python3_FIND_VIRTUALENV ONLY)
+
+    # search venv
     find_package(Python3 COMPONENTS Interpreter)
 
+    # if not venv found, create it
     if(NOT ${Python3_FOUND})
-        message(SEND_ERROR "Error creating python venv")
+        message(STATUS "Creating python ${PYTHON_VENV}")
+
+        # re-search to set Python3_EXECUTABLE back to system python
+        set(Python3_FIND_VIRTUALENV STANDARD)
+        find_package(Python3 COMPONENTS Interpreter)
+
+        # create the venv
+        execute_process(COMMAND "${Python3_EXECUTABLE}" -m venv
+                                "${PYTHON_VENV}")
+
+        # re-search
+        unset(Python3_EXECUTABLE)
+        unset(Python3_FOUND)
+        set(Python3_FIND_VIRTUALENV ONLY)
+        find_package(Python3 COMPONENTS Interpreter)
+
+        if(NOT ${Python3_FOUND})
+            message(SEND_ERROR "Error creating python venv")
+        endif()
     endif()
 endif()
 
-option(ENABLE_CLANG_TIDY "Enable to add clang tidy." ON)
-option(ENABLE_CLANG_FORMAT "Enable to add clang-format." ON)
-option(ENABLE_CMAKE_FORMAT "Enable to add cmake-format." ON)
 include(Tools)
 
 add_clang_format_target()
