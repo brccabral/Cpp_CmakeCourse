@@ -1,7 +1,7 @@
 #include <iostream>
 
 #include "config.hpp"
-#include "my_lib.h"
+#include "my_lib.hpp"
 
 #include <cxxopts.hpp>
 #include <fmt/format.h>
