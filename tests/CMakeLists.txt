@@ -10,7 +10,7 @@ if(ENABLE_TESTING)
         ${TEST_MAIN} PUBLIC ${LIBRARY_NAME} Catch2::Catch2WithMain
                             nlohmann_json::nlohmann_json)
     install(
-        TARGETS ${TEST_MAIN}
+        TARGETS ${TEST_MAIN} Catch2 Catch2WithMain
         EXPORT ${LIBRARY_NAME}
         ARCHIVE DESTINATION lib
         LIBRARY DESTINATION lib

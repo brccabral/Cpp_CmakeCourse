@@ -211,6 +211,16 @@ add_subdirectory(external)
 add_subdirectory(configured)
 
 # src must come before app because app depends on src library
+option(BUILD_SHARED_LIBS "If ON, will compile shared libs .so/.dll" OFF)
+if(BUILD_SHARED_LIBS)
+    # CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS is overkill, shoudl use __declspec() in my_lib functions
+    option(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS
+           "If ON, Windows will export symbols into .lib file" ON)
+endif()
+message(STATUS "BUILD_SHARED_LIBS ${BUILD_SHARED_LIBS}")
+message(
+    STATUS
+        "CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS ${CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS}")
 add_subdirectory(src)
 
 if(COMPILE_EXECUTABLE)
