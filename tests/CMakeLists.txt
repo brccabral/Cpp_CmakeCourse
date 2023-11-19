@@ -9,7 +9,12 @@ if(ENABLE_TESTING)
     target_link_libraries(
         ${TEST_MAIN} PUBLIC ${LIBRARY_NAME} Catch2::Catch2WithMain
                             nlohmann_json::nlohmann_json)
-    install(TARGETS ${TEST_MAIN})
+    install(
+        TARGETS ${TEST_MAIN}
+        EXPORT ${LIBRARY_NAME}
+        ARCHIVE DESTINATION lib
+        LIBRARY DESTINATION lib
+        RUNTIME DESTINATION bin)
 
     if(${ENABLE_WARNINGS})
         target_set_warnings(

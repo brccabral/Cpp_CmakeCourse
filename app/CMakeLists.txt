@@ -8,7 +8,12 @@ target_link_libraries(
             fmt::fmt
             spdlog::spdlog
             cxxopts::cxxopts)
-install(TARGETS ${EXECUTABLE_NAME})
+install(
+    TARGETS ${EXECUTABLE_NAME}
+    EXPORT ${LIBRARY_NAME}
+    ARCHIVE DESTINATION lib
+    LIBRARY DESTINATION lib
+    RUNTIME DESTINATION bin)
 
 if(${ENABLE_WARNINGS})
     target_set_warnings(
