@@ -202,3 +202,4 @@ To work with your git repo, open file `.git\hooks\pre-commit` and edit the `--co
 ```sh
 ARGS=(hook-impl --config=pre-commit-windows/.pre-commit-config.yaml --hook-type=pre-commit)
 ```
+`pre-commit` only runs on files that are in "Staged" git area.
