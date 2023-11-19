@@ -21,7 +21,7 @@ repos:
         '-std=c++17',
         '-Isrc/my_lib',
         '-Iout/build/x64-debug/configured_files/include',
-        '-Iout/build/x64-debug/_deps/nlohmann_json-src/include',
+        '-Iout/build/x64-debug/_deps/json-src/include',
         '-Iout/build/x64-debug/_deps/fmt-src/include',
         '-Iout/build/x64-debug/_deps/cxxopts-src/include',
         '-Iout/build/x64-debug/_deps/spdlog-src/include',
