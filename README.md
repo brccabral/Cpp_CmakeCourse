@@ -15,6 +15,10 @@ Cmake Udemy course https://udemy.com/course/cmake-tests-and-tooling-for-cc-proje
 ```sh
 git submodule add --depth 1 https://github.com/nlohmann/json external/json
 ```
+If you cloned a repo, you may want to pull the submodules using
+```sh
+git submodule update --init
+```
 
 2. Graphviz - view CMake dependencies in a flow chart  
 
