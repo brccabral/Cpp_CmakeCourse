@@ -482,8 +482,8 @@ function(
     # check for committed changes
     execute_process(
         COMMAND ${GIT_EXECUTABLE} diff -s --exit-code ${gitTag}
-        RESULT_VARIABLE resultGitDiff
-        OUTPUT_STRIP_TRAILING_WHITESPACE OUTPUT_QUIET
+        RESULT_VARIABLE resultGitDiff OUTPUT_STRIP_TRAILING_WHITESPACE
+                        OUTPUT_QUIET
         WORKING_DIRECTORY ${repoPath})
 
     if(${resultGitDiff} EQUAL 0)

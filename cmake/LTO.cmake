@@ -14,7 +14,11 @@ function(target_enable_lto)
     endif()
 
     include(CheckIPOSupported)
-    check_ipo_supported(RESULT result OUTPUT output)
+    check_ipo_supported(
+        RESULT
+        result
+        OUTPUT
+        output)
 
     if(result)
         message(STATUS "IPO/LTO is supported: ${LTO_TARGET}")
