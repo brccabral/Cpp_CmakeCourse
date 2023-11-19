@@ -31,4 +31,5 @@ repos:
        args: ["-c", ".cmake-format.yaml", "-i"]
        additional_dependencies: [pyyaml>=5.1]
      - id: cmake-lint
+       args: ["-c", ".cmake-format.yaml", "-i"]
        additional_dependencies: [pyyaml>=5.1]
