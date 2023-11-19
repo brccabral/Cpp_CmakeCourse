@@ -135,52 +135,60 @@
             "name": "default-build-linux",
             "displayName": "Linux Default",
             "configurePreset": "linux-debug",
-            "description": "Vanilla build"
+            "description": "Vanilla build",
+            "jobs": 10
         },
         {
             "name": "default-build-windows",
             "displayName": "Win Default",
             "configurePreset": "x64-debug",
-            "description": "Vanilla build"
+            "description": "Vanilla build",
+            "jobs": 10
         },
         {
             "name": "clang-build-windows",
             "displayName": "Win Clang",
             "configurePreset": "clang-x64-debug",
-            "description": "Clang Windows Debug"
+            "description": "Clang Windows Debug",
+            "jobs": 10
         },
         {
             "name": "clang-build-linux",
             "displayName": "Linux Clang",
             "configurePreset": "linux-clang-debug",
-            "description": "Clang Linux Debug"
+            "description": "Clang Linux Debug",
+            "jobs": 10
         },
         {
             "name": "release-build-linux",
             "displayName": "Linux Release",
             "configurePreset": "linux-release",
             "configuration": "Release",
-            "description": "Linux Release build"
+            "description": "Linux Release build",
+            "jobs": 10
         },
         {
             "name": "release-build-windows",
             "displayName": "Win Release",
             "configurePreset": "x64-release",
             "configuration": "Release",
-            "description": "Windows Release build"
+            "description": "Windows Release build",
+            "jobs": 10
         },
         {
             "name": "clang-release-build-windows",
             "displayName": "Win Release Clang",
             "configurePreset": "clang-x64-release",
             "configuration": "Release",
-            "description": "Clang Windows Release"
+            "description": "Clang Windows Release",
+            "jobs": 10
         },
         {
             "name": "clang-relase-build-linux",
             "displayName": "Linux Clang Release",
             "configurePreset": "linux-clang-release",
-            "description": "Clang Linux Release"
+            "description": "Clang Linux Release",
+            "jobs": 10
         }
     ],
     "testPresets": [
