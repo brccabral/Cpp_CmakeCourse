@@ -28,7 +28,7 @@ repos:
     rev: v0.6.10
     hooks:
      - id: cmake-format
-       args: ["-c", ".cmake-format.yaml"]
+       args: ["-c", ".cmake-format.yaml", "-i"]
        additional_dependencies: [pyyaml>=5.1]
      - id: cmake-lint
        additional_dependencies: [pyyaml>=5.1]
