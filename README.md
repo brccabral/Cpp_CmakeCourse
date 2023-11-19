@@ -196,7 +196,7 @@ Before running it, run the windows preset `x64-debug` so it can prepare the depe
 ```sh
 cmake --preset x64-debug
 cd pre-commit-windows
-pre-commit run --all-files
+pre-commit run --all-files --config=pre-commit-windows/.pre-commit-config.yaml
 ```
 To work with your git repo, open file `.git\hooks\pre-commit` and edit the `--config` option to point to the windows pre-commit .yml file
 ```sh
